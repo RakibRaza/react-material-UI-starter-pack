@@ -29,24 +29,13 @@ const NavBar = () => {
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = useState(null);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  const mobileMenu = (
-    <Menu
-      className={classes.mobileMenu}
-      anchorEl={anchorEl}
-      open={Boolean(anchorEl)}
-    >
-      <MenuItem onClick={handleClose}>Home</MenuItem>
-      <MenuItem onClick={handleClose}>About</MenuItem>
-      <MenuItem onClick={handleClose}>Contact</MenuItem>
-    </Menu>
-  );
 
   return (
     <>
@@ -68,10 +57,18 @@ const NavBar = () => {
             >
               <MenuIcon />
             </IconButton>
+            <Menu
+              className={classes.mobileMenu}
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+            >
+              <MenuItem onClick={handleClose}>Home</MenuItem>
+              <MenuItem onClick={handleClose}>About</MenuItem>
+              <MenuItem onClick={handleClose}>Contact</MenuItem>
+            </Menu>
           </Toolbar>
         </Container>
       </AppBar>
-      {mobileMenu}
     </>
   );
 };
