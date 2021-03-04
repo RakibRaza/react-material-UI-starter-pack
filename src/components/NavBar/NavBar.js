@@ -11,6 +11,8 @@ import {
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import React, { useState } from "react";
+import Scroll from "../Scroll/Scroll";
+import { Link } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   sectionDesktope: {
     display: "none",
@@ -39,15 +41,19 @@ const NavBar = () => {
 
   return (
     <>
-      <AppBar>
+      <AppBar position="static" color="secondary">
         <Container>
           <Toolbar>
             <Typography style={{ flexGrow: 1 }} variant="h5">
-              Material UI
+              BBC News
             </Typography>
             <div className={classes.sectionDesktope}>
-              <Button color="inherit">Home</Button>
-              <Button color="inherit">About</Button>
+              <Button component={Link} to="/" color="inherit">
+                Home
+              </Button>
+              <Button component={Link} to="/about" color="inherit">
+                About
+              </Button>
               <Button color="inherit">Contact</Button>
             </div>
             <IconButton
@@ -61,12 +67,14 @@ const NavBar = () => {
               className={classes.mobileMenu}
               anchorEl={anchorEl}
               open={Boolean(anchorEl)}
+              onClose={handleClose}
             >
               <MenuItem onClick={handleClose}>Home</MenuItem>
               <MenuItem onClick={handleClose}>About</MenuItem>
               <MenuItem onClick={handleClose}>Contact</MenuItem>
             </Menu>
           </Toolbar>
+          <Scroll showBelow={250} />
         </Container>
       </AppBar>
     </>
