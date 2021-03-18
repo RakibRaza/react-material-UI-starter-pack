@@ -1,32 +1,32 @@
 import {
   AppBar,
+  Box,
   Button,
   Container,
+  Drawer,
   Hidden,
   IconButton,
+  List,
+  ListItem,
+  ListItemText,
   makeStyles,
-  Menu,
-  MenuItem,
   Toolbar,
   Typography,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import React, { useState } from "react";
-import Scroll from "../Scroll/Scroll";
+
 import { Link } from "react-router-dom";
-const useStyles = makeStyles((theme) => ({}));
+import ScrollToTop from "../ScrollToTop/ScrollToTop";
+const useStyles = makeStyles((theme) => ({
+  drawer: {
+    width: "250px",
+  },
+}));
 
 const NavBar = () => {
   const classes = useStyles();
-
-  const [anchorEl, setAnchorEl] = useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const [open, setOpen] = useState(false);
 
   return (
     <>
@@ -46,22 +46,31 @@ const NavBar = () => {
               <Button color="inherit">Contact</Button>
             </Hidden>
             <Hidden mdUp>
-              <IconButton onClick={handleClick} color="inherit">
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                anchorEl={anchorEl}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>Home</MenuItem>
-                <MenuItem onClick={handleClose}>About</MenuItem>
-                <MenuItem onClick={handleClose}>Contact</MenuItem>
-              </Menu>
+              <Box>
+                <IconButton onClick={() => setOpen(true)} color="inherit">
+                  <MenuIcon />
+                </IconButton>
+              </Box>
+              <Drawer open={open} onClose={() => setOpen(false)}>
+                <List disablePadding className={classes.drawer}>
+                  <ListItem button>
+                    <ListItemText primary="News" />
+                  </ListItem>
+                  <ListItem button>
+                    <ListItemText primary="Destination" />
+                  </ListItem>
+                  <ListItem button>
+                    <ListItemText primary="Blog" />
+                  </ListItem>
+                  <ListItem button>
+                    <ListItemText primary="Contact" />
+                  </ListItem>
+                </List>
+              </Drawer>
             </Hidden>
           </Toolbar>
 
-          <Scroll showBelow={250} />
+          <ScrollToTop showBelow={250} />
         </Container>
       </AppBar>
     </>

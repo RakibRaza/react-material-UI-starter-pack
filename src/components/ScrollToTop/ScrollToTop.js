@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     zIndex: theme.zIndex.tooltip,
   },
 }));
-const Scroll = ({ showBelow }) => {
+const ScrollToTop = ({ showBelow }) => {
   const classes = useStyles();
   const [show, setShow] = useState(showBelow ? false : true);
 
@@ -48,4 +48,4 @@ const Scroll = ({ showBelow }) => {
     </div>
   );
 };
-export default Scroll;
+export default ScrollToTop;
